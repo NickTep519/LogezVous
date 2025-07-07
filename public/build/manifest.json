@@ -1,0 +1,19 @@
+{
+  "resources/css/app.css": {
+    "file": "assets/app-BGtipuhq.css",
+    "src": "resources/css/app.css",
+    "isEntry": true
+  },
+  "resources/js/app.js": {
+    "file": "assets/app-DaBYqt0m.js",
+    "name": "app",
+    "src": "resources/js/app.js",
+    "isEntry": true
+  },
+  "resources/js/intl-tel-input.js": {
+    "file": "assets/intl-tel-input-VtpwdS8c.js",
+    "name": "intl-tel-input",
+    "src": "resources/js/intl-tel-input.js",
+    "isEntry": true
+  }
+}

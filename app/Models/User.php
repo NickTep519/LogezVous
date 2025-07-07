@@ -3,14 +3,17 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Spatie\Permission\Traits\HasRoles;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -18,8 +21,14 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $fillable = [
-        'name',
+        'fname',
+        'lname',
+        'pseudo_or_agency',
+        'phone',
         'email',
+        'gender',
+        'dob',
+        'avatar',
         'password',
     ];
 
@@ -44,5 +53,21 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+
+    public function getNameAttribute() {
+
+        return "{$this->fname} {$this->lname}" ;
+    }
+
+    public function getImageAttribute() {
+
+        if ($this->avatar === 'images/default.png') {
+
+            return asset('images/default_user.png') ;
+        }
+
+        return asset('storage/' . $this->avatar) ;
     }
 }

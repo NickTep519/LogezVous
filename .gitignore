@@ -1,24 +1,40 @@
-*.log
-.DS_Store
-.env
-.env.backup
-.env.production
-.phpactor.json
-.phpunit.result.cache
-/.fleet
-/.idea
-/.nova
-/.phpunit.cache
-/.vscode
-/.zed
-/auth.json
+# Laravel / PHP
+/vendor
 /node_modules
-/public/build
-/public/hot
 /public/storage
 /storage/*.key
-/storage/pail
-/vendor
-Homestead.json
+.env
 Homestead.yaml
+Homestead.json
+/.vagrant
+
+# Laravel storage (cache, sessions, views)
+storage/app/public
+storage/framework/cache/*
+storage/framework/sessions/*
+storage/framework/views/*
+storage/logs/*
+
+# IDEs & OS
+.idea
+.vscode
+*.sublime-project
+*.sublime-workspace
+.DS_Store
 Thumbs.db
+
+# Composer
+composer.lock
+
+# NPM/Yarn/PNPM logs
+yarn-error.log
+npm-debug.log
+pnpm-debug.log
+
+# Cache & misc
+.phpunit.result.cache
+.env.backup
+.env.example.local
+
+# Git hooks
+.husky/*
