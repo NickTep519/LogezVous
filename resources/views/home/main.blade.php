@@ -6,5 +6,5 @@
 
     @include('home.banner')
 
-
+    @include('home.body')
 @endsection
