@@ -13,9 +13,11 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('agency_id')->nullable()->constrained()->cascadeOnDelete();
             $table->string('fname');
             $table->string('lname');
             $table->string('pseudo_or_agency') ;
+            $table->string('slug') ;
             $table->string('phone')->nullable();
             $table->string('email')->unique();
             $table->string('gender')->nullable();
@@ -28,6 +30,7 @@ return new class extends Migration
             $table->string('loc')->nullable(); // Pour lat,lng
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->boolean('status')->nullable() ;
             $table->rememberToken();
             $table->timestamps();
         });

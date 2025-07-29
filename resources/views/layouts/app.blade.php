@@ -24,7 +24,7 @@
 
 <body class="blue-skin">
 
-    @include('partials.preloader')
+    {{-- @include('partials.preloader') --}}
 
     <div id="main-wrapper">
 
@@ -42,6 +42,10 @@
     </div>
 
     @include('partials.scripts')
+    @include('partials.modales')
+    @include('partials.toastr')
+
+    @yield('scripts')
 
 </body>
 

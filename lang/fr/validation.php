@@ -64,6 +64,7 @@ return [
     'mac_address' => 'La valeur doit être une adresse MAC valide.',
     'max.array' => 'Le tableau ne peut contenir plus de :max éléments.',
     'max.file' => 'La taille du fichier ne peut pas dépasser :max kilo-octets.',
+    'max.image' => 'La taille de cette image ne peut pas dépasser :max kilo-octets.',
     'max.numeric' => 'La valeur ne peut être supérieure à :max.',
     'max.string' => 'Le texte ne peut contenir plus de :max caractères.',
     'max_digits' => 'Ce champ ne doit pas avoir plus de :max chiffres.',

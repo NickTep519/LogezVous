@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Validation\Rules;
 use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
+use App\Models\Agency;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Http;
@@ -37,7 +38,7 @@ class RegisteredUserController extends Controller
             'pseudo_or_agency' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
             'phone' => ['required', 'unique:users,phone'],
-            'role' => ['string', 'required', 'in:agence,demarcheur,client'],
+            'role' => ['string', 'required', 'in:agency_manager,demarcheur,locataire,proprietaire,client'],
             'password' => ['required', 'confirmed', 'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/'],
 
             // 'phone' => ['required', 'phone:' . $request->dial_code],
@@ -73,11 +74,44 @@ class RegisteredUserController extends Controller
             $user->assignRole($request->role);
         }
 
+        if ($user->hasRole('agency_manager')) {
+            $agency = Agency::create([
+                'name' => $request->pseudo_or_agency,
+                'email' => $request->email,
+                'phone' => $request->dial_code . $request->phone,
+            ]);
+
+            $agency->manager()->associate($user);
+            $agency->save();
+
+            $user->agency()->associate($agency);
+            $user->save();
+        }
+
+
 
         event(new Registered($user));
 
         Auth::login($user);
 
-        return redirect(route('dashboard', absolute: false));
+        $dashboardRoutes = [
+            'super-admin' => 'dashboard.admin',
+            'admin' => 'dashboard.admin',
+            'agency_manager' => 'dashboard.agency',
+            'agent' => 'dashboard.agency',
+            'demarcheur' => 'dashboard.demarcheur',
+            'proprietaire' => 'dashboard.proprietaire',
+            'locataire' => 'dashboard.tenant',
+        ];
+
+
+        foreach ($dashboardRoutes as $role => $route) {
+            if ($user->hasRole($role)) {
+                return redirect()->intended(route($route));
+            }
+        }
+
+
+        return redirect()->intended(route('home', absolute: false));
     }
 }

@@ -28,8 +28,29 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(route('dashboard', absolute: false));
+        $user = $request->user();
+
+        $dashboardRoutes = [
+            'super-admin' => 'dashboard.admin',
+            'admin' => 'dashboard.admin',
+            'agency_manager' => 'dashboard.agency',
+            'agent' => 'dashboard.agency',
+            'demarcheur' => 'dashboard.demarcheur',
+            'proprietaire' => 'dashboard.proprietaire',
+            'locataire' => 'dashboard.tenant',
+        ];
+
+
+        foreach ($dashboardRoutes as $role => $route) {
+            if ($user->hasRole($role)) {
+                return redirect()->intended(route($route));
+            }
+        }
+
+
+        return redirect()->intended(route('home', absolute: false));
     }
+
 
     /**
      * Destroy an authenticated session.

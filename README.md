@@ -1,51 +1,78 @@
-# LogezVous
+# 🏠 LogezVous
 
-**LogezVous** est une plateforme pour permettre aux démarcheurs et agences immobilières de publier et gérer des biens immobiliers (vente et location) pour la grande population.
+**LogezVous** est une plateforme web de gestion et de mise en relation immobilière : agences, démarcheurs, propriétaires et clients.
 
 ---
 
-## 🚀 Fonctionnalités principales
+## 📌 Objectif
 
-- Publication et gestion de biens immobiliers
-- Gestion des locataires pour les agences
-- Multi rôles : Administrateur, Démarcheur, Agence, Locataire
-- Recherche et filtrage avancé
-- Authentification sécurisée
-- Notifications et messagerie interne (à venir)
+- Centraliser les annonces immobilières : vente, location, terrain, magasin, bureaux, etc.
+- Offrir un tableau de bord complet pour chaque rôle (admin, manager, agent, démarcheur, propriétaire, client).
+- Digitaliser la gestion locative : contrats, factures, paiements.
+- Simplifier la recherche pour les clients.
 
 ---
 
 ## ⚙️ Stack technique
 
-- **Backend :** Laravel 12+
-- **Auth :** Laravel Breeze ou Fortify
-- **Permissions :** Spatie Laravel Permission
-- **Upload fichiers :** Spatie Media Library
-- **Frontend :** Blade / Inertia / Vue (à définir)
-- **Base de données :** MySQL / PostgreSQL
+- **Backend :** Laravel 10+
+- **Auth :** Laravel Breeze ou Jetstream
+- **Rôles & Permissions :** [Spatie Laravel Permission](https://spatie.be/docs/laravel-permission/v6/introduction)
+- **Upload média :** [Spatie Media Library](https://spatie.be/docs/laravel-medialibrary/v11/introduction)
+- **Frontend :** Blade + TailwindCSS (ou Vue/React si besoin)
+- **Base de données :** MySQL
+- **Autres :**
+  - Mailhog (pour tests mails)
+  - Dompdf (factures PDF)
+  - Pusher ou Laravel Echo pour notifications temps réel (optionnel)
 
 ---
 
-## 🔧 Installation
+## ✅ Fonctionnalités principales
 
-```bash
-# Cloner le repo
-git clone https://github.com/votre-username/logezvous.git
+### 🔑 Authentification
+- Inscription avec rôle choisi
+- Vérification email
+- Attribution auto des rôles
 
-# Aller dans le dossier
-cd logezvous
+### 🏢 Gestion des agences
+- Création d’une agence à l’inscription d’un `agency_manager`
+- Lien manager ↔️ agence
+- Agents reliés à une agence
 
-# Installer les dépendances PHP
-composer install
+### 🏘️ Annonces immobilières
+- Multi-upload images via Spatie Media Library
+- Filtres avancés : type, prix, chambres, surface, quartier, statut
+- Slug unique pour chaque bien
+- Coordonnées GPS (maps)
 
-# Installer les dépendances JS
-npm install && npm run dev
+### 🗂️ Tableau de bord
+- Tableau de bord spécifique selon rôle :
+  - Super Admin / Admin
+  - Agency Manager / Agent
+  - Démarcheur
+  - Propriétaire
+  - Locataire
+- Statistiques annonces, clients, locations
 
-# Copier le fichier d'environnement
-cp .env.example .env
+### 💼 Property Management (module)
+- Contrats de location
+- Gestion des paiements
+- Génération de factures PDF
+- Historique locataires
 
-# Générer la clé
-php artisan key:generate
+### 🔒 Sécurité
+- Middleware `auth` + `role` via Spatie
+- Routes protégées par rôle
+- Politique pour modification des biens
 
-# Configurer la DB dans .env puis migrer
-php artisan migrate
+### 🗃️ Commandes utiles
+
+# Créer la base de données + seeders
+php artisan migrate:fresh --seed
+
+# Lancer le serveur local
+php artisan serve
+
+# Vérifier les rôles & permissions
+php artisan tinker

@@ -14,14 +14,41 @@ class VerifyEmailController extends Controller
      */
     public function __invoke(EmailVerificationRequest $request): RedirectResponse
     {
-        if ($request->user()->hasVerifiedEmail()) {
-            return redirect()->intended(route('dashboard', absolute: false).'?verified=1');
+
+         $dashboardRoutes = [
+            'super-admin' => 'dashboard.admin',
+            'admin' => 'dashboard.admin',
+            'agency_manager' => 'dashboard.agency',
+            'agent' => 'dashboard.agency',
+            'demarcheur' => 'dashboard.demarcheur',
+            'proprietaire' => 'dashboard.proprietaire',
+            'locataire' => 'dashboard.tenant',
+        ];
+
+        $user = $request->user() ;
+
+        if ($user->hasVerifiedEmail()) {
+
+            foreach ($dashboardRoutes as $role => $route) {
+                if ($user->hasRole($role)) {
+                    return redirect()->intended(route($route, absolute: false). '?verified=1');
+                }
+            }
+            // return redirect()->intended(route('dashboard', absolute: false).'?verified=1');
         }
 
-        if ($request->user()->markEmailAsVerified()) {
-            event(new Verified($request->user()));
+        if ($user->markEmailAsVerified()) {
+            event(new Verified($user));
         }
 
-        return redirect()->intended(route('dashboard', absolute: false).'?verified=1');
+        foreach ($dashboardRoutes as $role => $route) {
+            if ($user->hasRole($role)) {
+                return redirect()->intended(route($route, absolute: false). '?verified=1');
+            }
+        }
+
+        return redirect()->intended(route('home', absolute: false));
+
+        // return redirect()->intended(route('dashboard', absolute: false).'?verified=1');
     }
 }

@@ -105,4 +105,4 @@
       </div>
       <!-- End Modal -->
 
-      <a id="back2Top" class="top-scroll" title="Back to top" href="home-5.html#"><i class="ti-arrow-up"></i></a>
+      <a id="back2Top" class="top-scroll" title="Back to top" href="#"><i class="ti-arrow-up"></i></a>

@@ -64,7 +64,7 @@
                                         <div class="form-group mb-3">
                                             <label for="lname"> @lang('label.fname') </label>
                                             <input type="text" id="fname" name="fname" value="{{ old('fname') }}"
-                                                class="form-control" autofocus placeholder="{{ __('label.fname') }}">
+                                                class="form-control" autofocus required placeholder="{{ __('label.fname') }}">
                                         </div>
                                         @error('fname')
                                             <div class="alert alert-danger">
@@ -77,7 +77,7 @@
                                         <div class="form-group mb-3">
                                             <label for="lname"> @lang('label.lname') </label>
                                             <input type="text" id="lname" name="lname" value="{{ old('lname') }}"
-                                                class="form-control" placeholder="{{ __('label.lname') }}">
+                                                class="form-control" required placeholder="{{ __('label.lname') }}">
                                         </div>
                                         @error('lname')
                                             <div class="alert alert-danger">
@@ -90,7 +90,7 @@
                                         <div class="form-group mb-3">
                                             <label for="pseudo_or_agency"> @lang('label.Pseudo') / @lang('label.Agency name') </label>
                                             <input type="text" id="pseudo_or_agency" name="pseudo_or_agency"
-                                                value="{{ old('pseudo_or_agency') }}" class="form-control"
+                                                value="{{ old('pseudo_or_agency') }}" class="form-control" required
                                                 placeholder="{{ __('label.Pseudo') }}/{{ __('label.Agency name') }}">
                                         </div>
                                         @error('pseudo_or_agency')
@@ -104,7 +104,7 @@
                                         <div class="form-group mb-3">
                                             <label for="email"> @lang('label.Email') </label>
                                             <input type="text" id="email" name="email" value="{{ old('email') }}"
-                                                class="form-control" placeholder="{{ __('label.Email') }}">
+                                                class="form-control" required placeholder="{{ __('label.Email') }}">
                                         </div>
                                         @error('email')
                                             <div class="alert alert-danger">
@@ -117,7 +117,7 @@
                                         <div class="form-group mb-3">
                                             {{-- <label for="phone"> @lang('label.Phone') </label> --}}
                                             <input type="text" id="phone" name="phone" value="{{ old('phone') }}"
-                                                class="form-control" placeholder="{{ __('label.Phone') }}">
+                                                class="form-control" required placeholder="{{ __('label.Phone') }}">
                                             <input type="hidden" id="dial_code" name="dial_code" />
                                         </div>
                                         @error('phone')
@@ -132,9 +132,11 @@
                                         <div class="form-group">
                                             <label> @lang('label.Signup As') </label>
                                             <select class="form-control" name="role" >
-                                                <option value="agence" > @lang('label.As a Agency') </option>
-                                                <option value="demarcheur"> @lang('label.As a canvasser') </option>
-                                                <option value="client" > @lang('label.As a Customer') </option>
+                                                <option value="agency_manager" {{ old('role') == 'agency_manager' ? 'selected' : '' }} > @lang('label.As a Agency') </option>
+                                                <option value="demarcheur" {{ old('role') == 'demarcheur' ? 'selected' : '' }} > @lang('label.As a canvasser') </option>
+                                                <option value="proprietaire" {{ old('role') == 'proprietaire' ? 'selected' : '' }} > @lang('label.As an owner') </option>
+                                                <option value="locataire" {{ old('role') == 'locataire' ? 'selected' : '' }} > @lang('label.As a tenant') </option>
+                                                <option value="client" {{ old('role') == 'client' ? 'selected' : '' }} > @lang('label.As a Customer') </option>
                                             </select>
                                         </div>
                                     </div>

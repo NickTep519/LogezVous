@@ -1,4 +1,3 @@
-
 <script src="{{ asset('users/assets/js/jquery.min.js') }}"></script>
 <script src="{{ asset('users/assets/js/popper.min.js') }}"></script>
 <script src="{{ asset('users/assets/js/bootstrap.min.js') }}"></script>
@@ -10,6 +9,27 @@
 <script src="{{ asset('users/assets/js/lightbox.js') }}"></script>
 <script src="{{ asset('users/assets/js/imagesloaded.js') }}"></script>
 <script src="{{ asset('users/assets/js/custom.js') }}"></script>
+<script src="{{ asset('users/assets/js/autres.js') }}"></script>
 <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@25.3.1/build/js/intlTelInput.min.js"></script>
+<script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.18/index.global.min.js'></script>
 
 @vite(['resources/js/intl-tel-input.js'])
+
+
+<script>
+    function openFilterSearch() {
+        document.getElementById("filter_search").style.display = "block";
+    }
+
+    function closeFilterSearch() {
+        document.getElementById("filter_search").style.display = "none";
+    }
+</script>
+
+<script>
+    $(document).ready(function() {
+        $("#showbutton").click(function() {
+            $("#showing").slideToggle("slow");
+        });
+    });
+</script>

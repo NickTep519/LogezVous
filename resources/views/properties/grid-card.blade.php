@@ -19,12 +19,15 @@
                      </div>
                  </div>
                  <div class="click rounded-3 overflow-hidden mb-0">
-                     <div><a href="single-property-1.html"><img src="{{ asset('users/assets/img/p-1.jpg') }}"
+                    @foreach ($property->getMedia('gallery') as $media)
+                         <div><a href="{{ route('properties.show', $property) }}"><img src="{{ $media->getUrl() }}"
+                                 class="img-fluid" alt="{{ $property?->title }}" /></a></div>
+                    @endforeach
+
+                     {{-- <div><a href="{{ route('properties.show', $property) }}"><img src="{{ asset('users/assets/img/p-9.jpg') }}"
                                  class="img-fluid" alt="" /></a></div>
-                     <div><a href="single-property-1.html"><img src="{{ asset('users/assets/img/p-9.jpg') }}"
-                                 class="img-fluid" alt="" /></a></div>
-                     <div><a href="single-property-1.html"><img src="{{ asset('users/assets/img/p-10.jpg') }}"
-                                 class="img-fluid" alt="" /></a></div>
+                     <div><a href="{{ route('properties.show', $property) }}"><img src="{{ asset('users/assets/img/p-10.jpg') }}"
+                                 class="img-fluid" alt="" /></a></div> --}}
                  </div>
              </div>
          </div>
@@ -34,11 +37,17 @@
                  <div class="listing-short-detail-wrap">
                      <div class="listing-short-detail">
                          <div class="d-flex align-items-center">
-                             <span class="label for-rent prt-type me-2">For Rent</span><span
-                                 class="label property-type property-cats">Apartment</span>
+                            <span class="label for-rent prt-type me-2">
+                                @if ($property?->listing_type === 'vente')
+                                    @lang('global.For Buy')
+                                @else
+                                    @lang('global.For Rent')
+                                @endif
+                            </span><span
+                                 class="label property-type property-cats"> {{ $property?->property_type }} </span>
                          </div>
-                         <h4 class="listing-name fw-medium fs-5 mb-1"><a href="single-property-1.html">The
-                                 Green Canton Chrysler</a></h4>
+                         <h4 class="listing-name fw-medium fs-5 mb-1"><a href="{{ route('properties.show', $property) }}">
+                                 {{ $property?->title }} </a></h4>
                          <div class="prt-location text-muted-2">
                              <span class="svg-icon svg-icon-2hx">
                                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
@@ -51,7 +60,7 @@
                                          fill="currentColor" />
                                  </svg>
                              </span>
-                             210 Zirak Road, Canada
+                             {{ $property?->city }} , {{ $property?->neighborhood }}
                          </div>
                      </div>
                  </div>
@@ -62,27 +71,25 @@
                      <div class="listing-card d-flex align-items-center">
                          <div class="square--25 text-muted-2 fs-sm circle gray-simple me-1"><i
                                  class="fa-solid fa-building-shield fs-xs"></i></div><span
-                             class="text-muted-2 fs-sm">3BHK</span>
+                             class="text-muted-2 fs-sm">{{ $property->configuration_code }}</span>
                      </div>
                      <div class="listing-card d-flex align-items-center">
                          <div class="square--25 text-muted-2 fs-sm circle gray-simple me-1"><i
-                                 class="fa-solid fa-bed fs-xs"></i></div><span class="text-muted-2 fs-sm">3
-                             Beds</span>
+                                 class="fa-solid fa-bed fs-xs"></i></div><span class="text-muted-2 fs-sm"> {{ $property?->bedrooms }} @lang('global.Bedrooms') </span>
                      </div>
                      <div class="listing-card d-flex align-items-center">
                          <div class="square--25 text-muted-2 fs-sm circle gray-simple me-1"><i
-                                 class="fa-solid fa-clone fs-xs"></i></div><span class="text-muted-2 fs-sm">1800
-                             SQFT</span>
+                                 class="fa-solid fa-clone fs-xs"></i></div><span class="text-muted-2 fs-sm"> {{  number_format($property->surface, 0, ',', ' ')  }} m² </span>
                      </div>
                  </div>
              </div>
 
              <div class="listing-detail-footer d-flex align-items-center justify-content-between py-4">
                  <div class="listing-short-detail-flex">
-                     <h6 class="listing-card-info-price m-0">$80,000</h6>
+                     <h6 class="listing-card-info-price m-0"> {{ $property->formatted_price }} </h6>
                  </div>
                  <div class="footer-flex">
-                     <a href="property-detail.html" class="prt-view">
+                     <a href="{{ route('properties.show', $property) }}" class="prt-view">
                          <span class="svg-icon text-main svg-icon-2hx">
                              <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                                  xmlns="http://www.w3.org/2000/svg">

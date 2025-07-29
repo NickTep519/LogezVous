@@ -1,4 +1,3 @@
- <!-- ============================ Call To Action ================================== -->
  <section class="bg-main call-to-act-wrap">
      <div class="container">
          <div class="row">
@@ -6,19 +5,18 @@
 
                  <div class="call-to-act">
                      <div class="call-to-act-head">
-                         <h3>Want to Become a Real Estate Agent?</h3>
-                         <span>We'll help you to grow your career and growth.</span>
+                         <h3> @lang('global.Want to Become a Real Estate Agent') </h3>
+                         <span>@lang("global.We'll help you to grow your career and growth")</span>
                      </div>
-                     <a href="home-5.html#" class="btn btn-call-to-act">SignUp Today</a>
+                     <a href="{{ route('register') }}" class="btn btn-call-to-act"> @lang('global.SignUp Today') </a>
                  </div>
 
              </div>
          </div>
      </div>
  </section>
- <!-- ============================ Call To Action End ================================== -->
 
- <!-- ============================ Footer Start ================================== -->
+
  <footer class="dark-footer skin-dark-footer">
      <div>
          <div class="container">
@@ -26,7 +24,7 @@
 
                  <div class="col-lg-3 col-md-4">
                      <div class="footer-widget">
-                         <a class="nav-footer-logo" href="index.html">
+                         <a class="nav-footer-logo" href="{{ route('home') }}">
                              <span class="svg-icon text-light svg-icon-2hx">
                                  <svg width="65" height="65" viewBox="0 0 24 24" fill="none"
                                      xmlns="http://www.w3.org/2000/svg">
@@ -38,7 +36,7 @@
                                          fill="currentColor" />
                                  </svg>
                              </span>
-                             <h5 class="fs-2 fw-bold text-light ms-1 my-0">Resido</h5>
+                             <h5 class="fs-2 fw-light text-light"> {{ config('app.name') }} </h5>
                          </a>
                          <div class="footer-add">
                              <p>Collins Street West, Victoria 8007, Australia.</p>
@@ -153,16 +151,15 @@
              <div class="row align-items-center">
 
                  <div class="col-lg-6 col-md-6">
-                     <p class="mb-0">© 2025 Resido. Designd By <a href="https://themezhub.com">Themez
-                             Hub</a> All Rights Reserved</p>
+                     <p class="mb-0">© 2025 {{ config('app.name') }} . @lang('global.All Rights Reserved')</p>
                  </div>
 
                  <div class="col-lg-6 col-md-6 text-right">
                      <ul class="footer-bottom-social">
-                         <li><a href="home-5.html#"><i class="fa-brands fa-facebook"></i></a></li>
-                         <li><a href="home-5.html#"><i class="fa-brands fa-twitter"></i></a></li>
-                         <li><a href="home-5.html#"><i class="fa-brands fa-instagram"></i></a></li>
-                         <li><a href="home-5.html#"><i class="fa-brands fa-linkedin"></i></a></li>
+                         <li><a href="https://web.facebook.com/"><i class="fa-brands fa-facebook"></i></a></li>
+                         <li><a href="https://x.com/"><i class="fa-brands fa-twitter"></i></a></li>
+                         <li><a href="https://www.instagram.com/"><i class="fa-brands fa-instagram"></i></a></li>
+                         <li><a href="https://fr.linkedin.com/"><i class="fa-brands fa-linkedin"></i></a></li>
                      </ul>
                  </div>
 
@@ -170,4 +167,3 @@
          </div>
      </div>
  </footer>
- <!-- ============================ Footer End ================================== -->

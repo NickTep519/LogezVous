@@ -19,13 +19,25 @@ class RoleSeeder extends Seeder
         // Admin
         Role::firstOrCreate(['name' => 'admin']);
 
-        // Agence Immobilière
-        Role::firstOrCreate(['name' => 'agence']);
+        // Chef d'agence
+        Role::firstOrCreate(['name' => 'agency_manager']);
+
+        // Agent Immobilier
+        Role::firstOrCreate(['name' => 'agent']);
 
         // Démarcheur
         Role::firstOrCreate(['name' => 'demarcheur']);
 
-        // Client / Visiteur
-        Role::firstOrCreate(['name' => 'client']);
+        // Propriétaire
+        Role::firstOrCreate(['name' => 'proprietaire']) ;
+
+
+        // Locataire
+        Role::firstOrCreate(['name' => 'locataire']);
+
+        // Client (Potentiel locataire)
+        Role::firstOrCreate(['name' => 'client']) ; ;
+
+
     }
 }
